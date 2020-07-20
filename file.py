@@ -13,7 +13,7 @@ r_names = []
 r_links = []
 r_counts = []
 driver = webdriver.Chrome("/home/akbar/PROJECTS/webscrapping/chromedriver")
-driver.get(f'https://www.zomato.com/{citylist[30]}/restaurants?')
+driver.get(f'https://www.zomato.com/{citylist[4]}/restaurants?')
 content = driver.page_source
 soup = BeautifulSoup(content,features="html5lib")
 
@@ -24,7 +24,7 @@ for a in soup.find('div', attrs={'class':'pagination-number'}):
 pgs = int(qq[1],10)
 
 for i in range(1,pgs+1):
-    driver.get(f'https://www.zomato.com/{citylist[30]}/restaurants?page={i}')
+    driver.get(f'https://www.zomato.com/{citylist[4]}/restaurants?page={i}')
     content = driver.page_source
     soup = BeautifulSoup(content,features="html5lib")
     count = 1
@@ -37,4 +37,4 @@ for i in range(1,pgs+1):
 
 
 df = pd.DataFrame({'No.':r_counts,'Restaurant Name':r_names,"Link":r_links})
-df.to_csv(f'{citylist[30]}.csv', index=False, encoding='utf-8')
+df.to_csv(f'{citylist[4]}.csv', index=False, encoding='utf-8')
