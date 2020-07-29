@@ -1,0 +1,9 @@
+list of datas to collect
+hotel name "sc-7kepeu-0"
+addresss / locality
+direction; ie., latitude and longitude-- https://www.google.com/maps/dir/?api=1&amp;destination=8.5193980369,76.9513649493
+tags
+opening hours
+
+
+{"_id":{"$oid":"5f210a8c675e5d8a1b20bef4"},"hotel_name":"abc","directions":"45746.45 -356356.243434","menu":{"name":"Chicken biriyani","price":"120","rating":4.5}}
