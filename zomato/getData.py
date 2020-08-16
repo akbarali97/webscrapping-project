@@ -131,68 +131,79 @@ for i in hotels[1:2]:
         pass
 
 
-    # # overview page scrapping
-    # time.sleep(3)
+    # overview page scrapping
+    try:
+        driver.find_element_by_xpath("//*[@id='root']/main//section[@role='tablist']//a[contains(text(),'Overview')]").click()
+        overview = True
+    except (NoSuchElementException,ElementNotInteractableException):
+        overview = False
+        pass
     # if str(driver.current_url) == url:
-
-    #     # get hotel_phonenumber
-    #     try:
-    #         element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/article/p').get_attribute("outerHTML")
-    #         soup = BeautifulSoup(element,features="html5lib")
-    #         hotel_phonenumber = str(soup.text)
-    #         print(hotel_phonenumber)
-    #     except NoSuchElementException as e:
-    #         print("hotel_name not found")
-    #         hotel_phonenumber = ''
+    if overview:
+        # get hotel_phonenumber
+        try:
+            element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/article/p').get_attribute("outerHTML")
+            soup = BeautifulSoup(element,features="html5lib")
+            hotel_phonenumber = str(soup.text)
+            print(hotel_phonenumber)
+        except NoSuchElementException as e:
+            print("hotel_name not found")
+            hotel_phonenumber = ''
         
-    #     # get hotel_address
-    #     try:
-    #         element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/article/section/p').get_attribute("outerHTML")
-    #         soup = BeautifulSoup(element,features="html5lib")
-    #         hotel_address = str(soup.text)
-    #         print(hotel_address)
-    #     except NoSuchElementException as e:
-    #         print("hotel_address not found")
-    #         hotel_address = ''
+        # get hotel_address
+        try:
+            element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/article/section/p').get_attribute("outerHTML")
+            soup = BeautifulSoup(element,features="html5lib")
+            hotel_address = str(soup.text)
+            print(hotel_address)
+        except NoSuchElementException as e:
+            print("hotel_address not found")
+            hotel_address = ''
 
-    #     # get cost_for_2
-    #     try:
-    #         element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/p[2]').get_attribute("outerHTML")
-    #         soup = BeautifulSoup(element,features="html5lib")
-    #         cost_for_2 = str(soup.text)
-    #         print(cost_for_2)
-    #     except NoSuchElementException as e:
-    #         print("cost_for_2 not found")
-    #         cost_for_2 = ''
+        # get cost_for_2
+        try:
+            element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/p[2]').get_attribute("outerHTML")
+            soup = BeautifulSoup(element,features="html5lib")
+            cost_for_2 = str(soup.text)
+            print(cost_for_2)
+        except NoSuchElementException as e:
+            print("cost_for_2 not found")
+            cost_for_2 = ''
 
-    #     # get payment_methods
-    #     try:
-    #         element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/p[4]').get_attribute("outerHTML")
-    #         soup = BeautifulSoup(element,features="html5lib")
-    #         payment_methods = str(soup.text)
-    #         print(payment_methods)
-    #     except NoSuchElementException as e:
-    #         print("cost_for_2 not found")
-    #         payment_methods = ''
+        # get payment_methods
+        try:
+            element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/p[4]').get_attribute("outerHTML")
+            soup = BeautifulSoup(element,features="html5lib")
+            payment_methods = str(soup.text)
+            print(payment_methods)
+        except NoSuchElementException as e:
+            print("cost_for_2 not found")
+            payment_methods = ''
 
-    #     # get additional_details
-    #     try:
-    #         element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/div[3]').get_attribute("outerHTML")
-    #         soup = BeautifulSoup(element,features="html5lib")
-    #         additional_details = []
-    #         for i in soup.findAll('p'):
-    #             additional_details.append(str(i.text)) 
-    #         print(additional_details)
-    #     except NoSuchElementException as e:
-    #         print("additional_details not found")
-    #         additional_details = ''
+        # get additional_details
+        try:
+            element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/div[3]').get_attribute("outerHTML")
+            soup = BeautifulSoup(element,features="html5lib")
+            additional_details = []
+            for i in soup.findAll('p'):
+                additional_details.append(str(i.text)) 
+            print(additional_details)
+        except NoSuchElementException as e:
+            print("additional_details not found")
+            additional_details = ''
 
         
     # # order-page scraping
-    driver.get(url+'/order')
-    # time.sleep(3)
-    if str(driver.current_url) == url+'/order':
-
+    # driver.get(url+'/order')
+    try:
+        driver.find_element_by_xpath("//*[@id='root']/main//section[@role='tablist']//a[contains(text(),'Order')]").click()
+        time.sleep(2)
+        order = True
+    except (NoSuchElementException,ElementNotInteractableException):
+        order = False
+        pass
+    # if str(driver.current_url) == url+'/order':
+    if order:
         # # get categories
         c_count = 2
         items = []
@@ -351,32 +362,53 @@ for i in hotels[1:2]:
             
 
     # # photos-page scraping
-    # # get image img
-        # element = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[2]/div[1]/div/div/img').get_attribute("outerHTML")
-        # soup = BeautifulSoup(element,features="html5lib")
-        # imgurl = str(soup.find("img")["src"]).strip()
-        # img = base64.b64encode(requests.get(imgurl,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content)
+    try:
+        driver.find_element_by_xpath("//*[@id='root']/main//section[@role='tablist']//a[contains(text(),'Photos')]").click()
+        time.sleep(2)
+        Photos = True
+        images = []
+    except (NoSuchElementException,ElementNotInteractableException):
+        Photos = False
+        images = "Not Available"
+        pass
+    if Photos:
+        actions = ActionChains(driver)
+        for j in driver.find_elements_by_xpath('//*[@id="root"]/main/div/section[4]/div/div[2]/div//img'):
+            actions.move_to_element(j).perform()
+            driver.implicitly_wait(1)
+            image_url = str(j.get_attribute("src")).split('?')[0]
+            image = base64.b64encode(requests.get(image_url,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content)
+            images.append(image)
 
     # # reviews-page scrapping
-    driver.get(url+'/reviews')
+    try:
+        driver.find_element_by_xpath("//*[@id='root']/main//section[@role='tablist']//a[contains(text(),'Reviews')]").click()
+        # time.sleep(2)
+        Review = True
+        Reviews = []
+    except (NoSuchElementException,ElementNotInteractableException):
+        Review = False
+        Reviews = "Not Available"
+        pass
+    if Review:
 
 
-    # # create a hotel_object for inserting into db
-    # hotel_object = {
-    #     "hotel_name": hotel_name,
-    #     "hotel_cuisines": hotel_cuisines,
-    #     "hotel_link":url,
-    #     "hotel_phonenumber":hotel_phonenumber,
-    #     "hotel_address":hotel_address,
-    #     "hotel_locality":hotel_locality,
-    #     "hotel_direction":hotel_direction,
-    #     "hotel_openhours":hotel_openhours,
-    # }
+    # create a hotel_object for inserting into db
+    hotel_object = {
+        "hotel_name": hotel_name,
+        "hotel_cuisines": hotel_cuisines,
+        "hotel_link":url,
+        "hotel_phonenumber":hotel_phonenumber,
+        "hotel_address":hotel_address,
+        "hotel_locality":hotel_locality,
+        "hotel_direction":hotel_direction,
+        "hotel_openhours":hotel_openhours,
+    }
 
-    # # insert data into db
-    # zx = hotelObject.insert_one(hotel_object)
+    # insert data into db
+    zx = hotelObject.insert_one(hotel_object)
 
 
-# finally close the driver and exit the program
+# # finally close the driver and exit the program
 # driver.close()
 sys.exit()
