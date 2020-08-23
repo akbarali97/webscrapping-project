@@ -60,16 +60,14 @@ con.close()
 
 
 # # itrating through each hotel in hotels list 
-for i in hotels[1:2]:
+for i in hotels:
     print(i)
     if i['isScaned'] == 'True' : continue
     url = str(i['hotel_link'])
     hl_id = i['hl_id']
     # url = 'https://www.zomato.com/trivandrum/zam-zam-ymr-ambalamukku'
-    url = 'https://www.zomato.com/kozhikode/dominos-pizza-arrakinar'
+    # url = 'https://www.zomato.com/kozhikode/dominos-pizza-arrakinar'
     driver.get(url)
-    # driver.implicitly_wait(2)
-    # time.sleep(5)
     # Scrap page-header details
     # get hotel_name
     try:
@@ -535,7 +533,7 @@ for i in hotels[1:2]:
         zx = hotelObject.insert_one(hotel_object)
     except Exception as e:
         print(e)
-        break
+        pass
 
     # update the isScaned status to True
     try:
