@@ -57,10 +57,8 @@ con.close()
 
 # visit every link in db and collect data
 
-
-
 # # itrating through each hotel in hotels list 
-for i in hotels:
+for i in [x for x in hotels if x['city_name'] == 'Kochi']:
     print(i)
     if i['isScaned'] == 'True' : continue
     url = str(i['hotel_link'])
@@ -172,25 +170,27 @@ for i in hotels:
         try:
             hotel_phonenumber = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/article/p').text
         except:
-            pass
+            hotel_phonenumber = 'Not Available'
         
         # get hotel_address
         try:
             hotel_address = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/article/section/p').text
         except:
-            pass
+            hotel_address = 'Not Available'
 
         # get cost_for_2
         try:
             cost_for_2 = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/p[contains(text(),"₹")]').text
         except:
-            pass
+            cost_for_2 = 'Not Available'
+            
 
         # get payment_methods
         try:
             payment_methods = driver.find_element_by_xpath('//*[@id="root"]/main/div/section[4]/section/section/article[1]/section[1]/p[contains(text(),"accepted")]').text
         except:
-            pass
+            payment_methods = 'Not Available'
+            
 
         # get additional_details
         try:
@@ -200,7 +200,7 @@ for i in hotels:
             for i in soup.findAll('p'):
                 additional_details.append(str(i.text)) 
         except:
-            pass
+            additional_details = 'Not Available'
     else:
         additional_details = 'Not Available'
         payment_methods = 'Not Available'
@@ -436,8 +436,8 @@ for i in hotels:
 
     # # reviews-page scrapping
     try:
-        driver.find_element_by_xpath("//*[@id='root']/main//section[@role='tablist']//a[contains(text(),'Reviews')]").click()
-        el = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/main/div/section[4]//h4[text()="Reviews"]')))
+        driver.find_element_by_xpath("//*[@id='root']/main//section[@role='tablist']//a[contains(text(),'Reviews1')]").click()
+        # el = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/main/div/section[4]//h4[text()="Reviews"]')))
         Review = True
     except:
         Review = False
