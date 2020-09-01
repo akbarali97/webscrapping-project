@@ -1,4 +1,6 @@
-/zomato/images
+zomato/images/*
 
 /zomato/data
 
+zomato/images/12-to-12-bbq-panampilly-nagar_coverimage_0.webp
+.vscode/settings.json

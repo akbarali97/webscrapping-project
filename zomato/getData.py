@@ -1,5 +1,6 @@
 # import json
 import os
+import fnmatch
 # import base64
 import pprint
 # import random
@@ -122,8 +123,11 @@ for i in [x for x in hotels if x['city_name'] == 'Kochi']:
                 actions = ActionChains(driver)
                 actions.move_to_element(element).perform()
                 cover_image_url = str(element.get_attribute("src"))
-                cover_image = requests.get(cover_image_url,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content
                 img_filename = url.split('/')[4] + "_coverimage_" + f"{s}" + ".webp"
+                # for f in os.listdir('./images'):
+                #     if fnmatch.fnmatch(f,img_filename): pass
+                #     else:
+                cover_image = requests.get(cover_image_url,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content
                 with open(f"./images/{img_filename}", "wb") as f:f.write(cover_image)
                 cover_images.append(img_filename)
                 s = s + 1
@@ -261,8 +265,11 @@ for i in [x for x in hotels if x['city_name'] == 'Kochi']:
                             actions = ActionChains(driver)
                             actions.move_to_element(element).perform()
                             item_image_url = str(element.get_attribute("src")).split('?')[0]
-                            item_image = requests.get(item_image_url,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content
                             img_filename = url.split('/')[4] + "_item_image_" + item_name + ".webp"
+                            # for f in os.listdir('./images'):
+                            #     if fnmatch.fnmatch(f,img_filename): pass
+                            #     else:
+                            item_image = requests.get(item_image_url,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content
                             with open(f"./images/{img_filename}", "wb") as f:f.write(item_image)
                             item_image = img_filename
                         except:
@@ -421,8 +428,11 @@ for i in [x for x in hotels if x['city_name'] == 'Kochi']:
                 actions.move_to_element(element).perform()
                 el = WebDriverWait(driver, 4).until(EC.visibility_of(element))
                 image_url = str(element.get_attribute("src")).split('?')[0]
-                image = requests.get(image_url,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content
                 img_filename = url.split('/')[4] + "_image_" + f"{s}" + ".webp"
+                # for f in os.listdir('./images'):
+                #     if fnmatch.fnmatch(f,img_filename): pass
+                #     else:
+                image = requests.get(image_url,headers={'user-agent': 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13'}).content
                 with open(f"./images/{img_filename}", "wb") as f:f.write(image)
                 images.append(img_filename)
                 s = s + 1
